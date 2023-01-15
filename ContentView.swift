@@ -16,11 +16,11 @@ struct ContentView: View {
     
     var buttonTypes: [[ButtonType]] {
         [
-            [.valuta(.vanBEF), .nothing, .valuta(.vanEuro)],
+            [.valuta(.vanBEF), .valuta(.vanEuro), .clear],
          [.digit(.seven), .digit(.eight), .digit(.nine)],
          [.digit(.four), .digit(.five), .digit(.six)],
          [.digit(.one), .digit(.two), .digit(.three)],
-            [.digit(.zero), .decimal, .nothing]
+            [.digit(.zero), .decimal, .deleteChar]
         
         ]
     }
@@ -81,8 +81,10 @@ struct ContentView: View {
                                         calculator.setOriginel(valuta)
                                     case .decimal:
                                         calculator.setDecimal()
-                                    case .nothing:
+                                    case .clear:
                                         calculator.clear()
+                                    case .deleteChar:
+                                        calculator.deleteChar()
                                     }
                                 }.font(.system(size: 32, weight: .medium))
                                     .frame(maxWidth: .infinity,

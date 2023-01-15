@@ -24,12 +24,12 @@ class Calculator:ObservableObject{
             origineel = .vanEuro
             naar = .vanBEF
         }
+        calculate()
     }
     
     func setDigit(_ digit: Digit) {
          inputValue.append(digit.description)
         calculate()
-        print(inputValue)
     }
     
     func setDecimal(){
@@ -38,6 +38,16 @@ class Calculator:ObservableObject{
     
     func clear(){
         inputValue = ""
+        outputValue = ""
+    }
+    
+    func deleteChar(){
+        if(inputValue.count > 0){
+            inputValue.removeLast()
+        }else{
+            outputValue = ""
+        }
+        calculate()
     }
     
     func calculate(){
@@ -45,15 +55,17 @@ class Calculator:ObservableObject{
         case .vanEuro:
             guard let decimalAmount1 = Decimal(string: inputValue) else { return }
             let omgezet = decimalAmount1 * omzetting
-            outputValue = omgezet.formatted()
-           // outputValue = omgezet.description
+            let doublevalue:Double = Double(omgezet.description)!
+            outputValue = String(format: "%.2f", doublevalue)
         
         case .vanBEF:
             guard let decimalAmount1 = Decimal(string: inputValue) else { return }
-            let omgezet = decimalAmount1 * omzetting
-            outputValue = omgezet.formatted()
-          //  outputValue = round(omgezet, 2).description
+            let omgezet = decimalAmount1 / omzetting
+            let doublevalue:Double = Double(omgezet.description)!
+            outputValue = String(format: "%.2f", doublevalue)
+
         
         }
     }
+    
 }

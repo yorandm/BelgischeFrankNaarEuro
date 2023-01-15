@@ -13,7 +13,8 @@ enum ButtonType: Hashable, CustomStringConvertible {
     //case operation(_ operation: ArithmeticOperation)
     case valuta(_ valuta: Valuta)
     case decimal
-    case nothing
+    case clear
+    case deleteChar
     var description: String {
             switch self {
             case .digit(let digit):
@@ -22,8 +23,10 @@ enum ButtonType: Hashable, CustomStringConvertible {
                 return valuta.description
             case .decimal:
                 return "."
-            case .nothing:
-                return ""
+            case .clear:
+                return "C"
+            case .deleteChar:
+                return "DEL"
             }
         }
     
@@ -33,8 +36,8 @@ enum ButtonType: Hashable, CustomStringConvertible {
             return .orange
         case  .decimal, .digit:
             return .secondary
-        case .nothing:
-            return .black
+        case .clear, .deleteChar:
+            return Color(.lightGray)
         }
     }
     
